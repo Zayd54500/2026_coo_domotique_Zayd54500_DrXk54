@@ -6,90 +6,113 @@ import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String args[]) {
-		// la telecommande vide
-		Telecommande t = new Telecommande();
+    public static void main(String args[]) {
+        // la telecommande vide
+        Telecommande t = new Telecommande();
 
-		// ajoute des objets
-		// utilisation de refactor (extract method)
-		// pour rendre le code plus clair
-		ajouter4Lampes(t);
+        // ajoute des lampes
+        ajouter4Lampes(t);
 
-		// test d'activation
-		t.activerLampe(1);
-		t.activerLampe(3);
-		System.out.println(t);
+        // ajoute des chaines Hifi
+        ajouter2Hifi(t);
 
-		// gestion du menu
-		lancerMenu(t);
-	}
+        // test d'activation lampes
+        t.activerLampe(1);
+        t.activerLampe(3);
 
-	/**
-	 * menu qui permet de manipuler une telecommande
-	 * 
-	 * @param t
-	 *            telecommande a manipuler
-	 */
-	private static void lancerMenu(Telecommande t) {
-		System.out.println(t);
-		Scanner sc = new Scanner(System.in);
-		
-		boolean fini=false;
-		
-		// tant qu'il y a des commandes
-		while (!fini) {
-			
-			// demande lampe et commande
-			System.out.println("entrer le numero de la lampe");
-			int choix = sc.nextInt();
-			System.out.println("entrer commande (+/-/exit)");
-			String com = sc.nextLine();
-			com = sc.nextLine();
+        // test d'activation Hifi
+        t.activerTout(); // toutes les lampes et hifi activées
+        System.out.println(t);
 
-			// si la commande est +, on active
-			if (com.equals("+")) {
-				System.out.println("== activer "+choix+"==");
-				t.activerLampe(choix);
-			}
-			// si la commande est - on descactive
-			else if (com.equals("-")) {
-				System.out.println("== desactiver "+choix+"==");
-				t.desactiverLampe(choix);
-			}
-			// si la commande est exit, on arrete
-			else if (com.equals("exit")) {
-				System.out.println("== Fin du programme == ");
-				fini=true;
-			}
-			// commande non reconnue
-			else {
-				System.out.println("commande inconnue");
-			}
-			
-			//affiche l'etat de le telecommande
-			System.out.println(t);
-		}
-		sc.close();
-	}
+        // gestion du menu
+        lancerMenu(t);
+    }
 
-	/**
-	 * creation des objets et ajout dans la telecommande
-	 * 
-	 * @param t
-	 *            telecommande dans lequelle on ajoute 4 lampes
-	 */
-	private static void ajouter4Lampes(Telecommande t) {
-		Lampe l1 = new Lampe("Lampe1");
-		t.ajouterLampe(l1);
+    /**
+     * menu qui permet de manipuler une telecommande
+     * 
+     * @param t telecommande a manipuler
+     */
+    private static void lancerMenu(Telecommande t) {
+        System.out.println(t);
+        Scanner sc = new Scanner(System.in);
 
-		Lampe l2 = new Lampe("Lampe2");
-		t.ajouterLampe(l2);
+        boolean fini = false;
 
-		Lampe l3 = new Lampe("Lampe3");
-		t.ajouterLampe(l3);
+        while (!fini) {
+            System.out.println("Entrer le type d'appareil (lampe/hifi/exit) : ");
+            String type = sc.nextLine();
 
-		Lampe l4 = new Lampe("Lampe4");
-		t.ajouterLampe(l4);
-	}
+            if (type.equals("exit")) {
+                System.out.println("== Fin du programme == ");
+                break;
+            }
 
+            if (type.equals("lampe")) {
+                System.out.println("Entrer le numero de la lampe : ");
+                int choix = sc.nextInt();
+                sc.nextLine(); // consommer le retour chariot
+                System.out.println("Entrer commande (+/-) : ");
+                String com = sc.nextLine();
+
+                if (com.equals("+")) {
+                    t.activerLampe(choix);
+                } else if (com.equals("-")) {
+                    t.desactiverLampe(choix);
+                } else {
+                    System.out.println("Commande inconnue");
+                }
+
+            } else if (type.equals("hifi")) {
+                System.out.println("Entrer le numero de la Hifi : ");
+                int choix = sc.nextInt();
+                sc.nextLine(); // consommer le retour chariot
+                System.out.println("Entrer commande (+/-) : ");
+                String com = sc.nextLine();
+
+                if (com.equals("+")) {
+                    t.hifis.get(choix).allumer();
+                } else if (com.equals("-")) {
+                    t.hifis.get(choix).eteindre();
+                } else {
+                    System.out.println("Commande inconnue");
+                }
+
+            } else {
+                System.out.println("Type d'appareil inconnu");
+            }
+
+            System.out.println(t);
+        }
+
+        sc.close();
+    }
+
+    /**
+     * creation des lampes et ajout dans la telecommande
+     */
+    private static void ajouter4Lampes(Telecommande t) {
+        Lampe l1 = new Lampe("Lampe1");
+        t.ajouterLampe(l1);
+
+        Lampe l2 = new Lampe("Lampe2");
+        t.ajouterLampe(l2);
+
+        Lampe l3 = new Lampe("Lampe3");
+        t.ajouterLampe(l3);
+
+        Lampe l4 = new Lampe("Lampe4");
+        t.ajouterLampe(l4);
+    }
+
+    /**
+     * creation de chaines Hifi et ajout dans la telecommande
+     */
+    private static void ajouter2Hifi(Telecommande t) {
+        Hifi h1 = new Hifi();
+        t.ajouterHifi(h1);
+
+        Hifi h2 = new Hifi();
+        t.ajouterHifi(h2);
+    }
 }
