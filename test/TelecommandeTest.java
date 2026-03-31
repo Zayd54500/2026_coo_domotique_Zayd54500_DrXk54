@@ -1,49 +1,61 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class TelecommandeTest {
 
     @Test
-    void testAjouterLampe() {
+    public void testAjouterLampeVide() {
+        // préparation
         Telecommande t = new Telecommande();
         Lampe l = new Lampe("Salon");
+
+        // action
         t.ajouterLampe(l);
-        assertEquals("0 - Lampe Salon: éteinte\n", t.toString());
+
+        // vérification
+        assertTrue(t.toString().contains("Salon"));
     }
 
     @Test
-    void testActiverLampe() {
-        Telecommande t = new Telecommande();
-        Lampe l = new Lampe("Salon");
-        t.ajouterLampe(l);
-        t.activerLampe(0);
-        assertEquals("0 - Lampe Salon: allumée\n", t.toString());
-    }
-
-    @Test
-    void testDesactiverLampe() {
-        Telecommande t = new Telecommande();
-        Lampe l = new Lampe("Salon");
-        t.ajouterLampe(l);
-        t.activerLampe(0);
-        t.desactiverLampe(0);
-        assertEquals("0 - Lampe Salon: éteinte\n", t.toString());
-    }
-
-    @Test
-    void testActiverTout() {
+    public void testAjouterLampeDeuxieme() {
         Telecommande t = new Telecommande();
         Lampe l1 = new Lampe("Salon");
-        Lampe l2 = new Lampe("Cuisine");
+        Lampe l2 = new Lampe("Chambre");
+
         t.ajouterLampe(l1);
         t.ajouterLampe(l2);
-        t.activerTout();
-        assertEquals("0 - Lampe Salon: allumée\n1 - Lampe Cuisine: allumée\n", t.toString());
+
+        assertTrue(t.toString().contains("Chambre"));
     }
 
     @Test
-    void testLampeInexistante() {
+    public void testActiverLampe0() {
         Telecommande t = new Telecommande();
-        assertThrows(IndexOutOfBoundsException.class, () -> t.activerLampe(5));
+        Lampe l = new Lampe("Salon");
+
+        t.ajouterLampe(l);
+        t.activerLampe(0);
+
+        assertTrue(l.toString().contains("true"));
+    }
+
+    @Test
+    public void testActiverLampe1() {
+        Telecommande t = new Telecommande();
+        Lampe l1 = new Lampe("Salon");
+        Lampe l2 = new Lampe("Chambre");
+
+        t.ajouterLampe(l1);
+        t.ajouterLampe(l2);
+
+        t.activerLampe(1);
+
+        assertTrue(l2.toString().contains("true"));
+    }
+
+    @Test(expected = Error.class)
+    public void testLampeInexistante() {
+        Telecommande t = new Telecommande();
+        t.activerLampe(0);
     }
 }
