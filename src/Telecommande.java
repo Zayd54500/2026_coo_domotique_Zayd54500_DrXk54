@@ -1,22 +1,54 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Telecommande {
-    Telecommande() {
 
+    // Attribut
+    private List<Lampe> lampes;
+
+    // Constructeur
+    public Telecommande() {
+        lampes = new ArrayList<>();
     }
 
-    void ajouterLampe(Lampe lampe) throws new Error("Code non écrit"){
+    // Ajouter une lampe
+    public void ajouterLampe(Lampe lampe) {
+        if (lampe != null) {
+            lampes.add(lampe);
+        }
     }
 
-    void activerLampe(int indiceLampe) throws new Error("Code non écrit"){
-
+    // Activer une lampe
+    public void activerLampe(int indiceLampe) {
+        if (indiceLampe >= 0 && indiceLampe < lampes.size()) {
+            lampes.get(indiceLampe).allumer();
+        } else {
+            throw new IndexOutOfBoundsException("Lampe inexistante");
+        }
     }
 
-    void desactiverLampe(int indiceLampe) throws new Error("Code non écrit"){
-
+    // Désactiver une lampe
+    public void desactiverLampe(int indiceLampe) {
+        if (indiceLampe >= 0 && indiceLampe < lampes.size()) {
+            lampes.get(indiceLampe).eteindre();
+        } else {
+            throw new IndexOutOfBoundsException("Lampe inexistante");
+        }
     }
-    void activer() throws new Error("Code non écrite"){
 
+    // Activer toutes les lampes
+    public void activerTout() {
+        for (Lampe lampe : lampes) {
+            lampe.allumer();
+        }
     }
-    String toString() throws new Error("Code non écrite"){
-        
+
+    // toString
+    public String toString() {
+        String result = "Télécommande :\n";
+        for (int i = 0; i < lampes.size(); i++) {
+            result += i + " - " + lampes.get(i).toString() + "\n";
+        }
+        return result;
     }
 }
