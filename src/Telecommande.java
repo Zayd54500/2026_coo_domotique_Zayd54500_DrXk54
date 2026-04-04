@@ -23,13 +23,13 @@ public class Telecommande {
 
     public void activerLampe(int indiceLampe) {
         if (indiceLampe < 0 || indiceLampe >= lampes.size()) {
-            throw new Error("lampe innexistante")
+            throw new Error("lampe innexistante");
         }
         lampes.get(indiceLampe).allumer();
     }
 
     public void activerHifi(int indiceHifi) {
-        if (indiceHifi < 0 || indiceHifi >= hifis.siez()) {
+        if (indiceHifi < 0 || indiceHifi >= hifis.size()) {
             throw new Error("hifi innexistante");
         }
         hifis.get(indiceHifi).allumer();
@@ -37,27 +37,25 @@ public class Telecommande {
 
     public void desactiverLampe(int indiceLampe) {
         if (indiceLampe < 0 || indiceLampe >= lampes.size()) {
-            throw new Error("lampe innexistante")
+            throw new Error("lampe innexistante");
         }
         lampes.get(indiceLampe).eteindre();
     }
 
     public void desactiverHifi(int indiceHifi) {
-        if (indiceHifi < 0 || indiceHifi >= hifis.siez()) {
+        if (indiceHifi < 0 || indiceHifi >= hifis.size()) {
             throw new Error("hifi innexistante");
         }
         hifis.get(indiceHifi).eteindre();
     }
 
     public void activerTout() {
-        public void activerTout() {
-            for (Lampe l : lampes) {
-                l.allumer();
-            }
-            for (Hifi h : hifis) {
-                h.allumer();
+        for (Lampe l : lampes) {
+            l.allumer();
         }
-
+        for (Hifi h : hifis) {
+            h.allumer();
+        }
     }
 
     public String toString() {

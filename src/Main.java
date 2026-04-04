@@ -71,9 +71,9 @@ public class Main {
                 String com = sc.nextLine();
 
                 if (com.equals("+")) {
-                    t.hifis.get(choix).allumer();
+                    t.activerHifi(choix);
                 } else if (com.equals("-")) {
-                    t.hifis.get(choix).eteindre();
+                    t.desactiverHifi(choix);
                 } else {
                     System.out.println("Commande inconnue");
                 }

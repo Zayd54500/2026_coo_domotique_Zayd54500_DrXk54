@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TelecommandeTest {
     @Test
     public void testAjouterLampeVide() {
-        Telecommande T = new Telecommande() ;
+        Telecommande t = new Telecommande() ;
         Lampe l = new Lampe("Salon");
         t.ajouterLampe(l);
         String resultat = t.toString();
