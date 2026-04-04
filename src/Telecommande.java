@@ -9,22 +9,37 @@ public class Telecommande {
     }
 
     public void ajouterLampe(Lampe l) {
-        throw new Error("code non ecrit");
+        lampes.add(l);
     }
 
     public void activerLampe(int indiceLampe) {
-        throw new Error("code non ecrit");
+        if (indiceLampe < 0 || indiceLampe >= lampes.size()) {
+            throw new Error("lampe innexistante")
+        }
+        lampes.get(indiceLampe).allumer();
     }
 
     public void desactiverLampe(int indiceLampe) {
-        throw new Error("code non ecrit");
+        if (indiceLampe < 0 || indiceLampe >= lampes.size()) {
+            throw new Error("lampe innexistante")
+        }
+        lampes.get(indiceLampe).eteindre();
     }
 
     public void activerTout() {
-        throw new Error("code non ecrit");
+        public void activerTout() {
+            for (Lampe l : lampes) {
+                l.allumer();
+            }
+        }
+
     }
 
     public String toString() {
-        throw new Error("code non ecrit");
+        String resultat = "";
+        for (int i = 0; i < lampes.size(); i++) {
+            resultat += i + " - " + lampes.get(i).toString() + "\n";
+        }
+        return resultat;
     }
 }

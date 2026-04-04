@@ -1,19 +1,14 @@
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TelecommandeTest {
-
     @Test
     public void testAjouterLampeVide() {
-        // préparation
-        Telecommande t = new Telecommande();
+        Telecommande T = new Telecommande() ;
         Lampe l = new Lampe("Salon");
-
-        // action
         t.ajouterLampe(l);
-
-        // vérification
-        assertTrue(t.toString().contains("Salon"));
+        String resultat = t.toString();
+        assertTrue(resultat.contains("Salon"),"La telecommande devrait contenir la lampe Salon");
     }
 
     @Test
@@ -21,41 +16,43 @@ public class TelecommandeTest {
         Telecommande t = new Telecommande();
         Lampe l1 = new Lampe("Salon");
         Lampe l2 = new Lampe("Chambre");
-
         t.ajouterLampe(l1);
         t.ajouterLampe(l2);
-
-        assertTrue(t.toString().contains("Chambre"));
+        String resultat = t.toString();
+        assertTrue(resultat.contains("Chambre"), "La telecommande devrait contenir la deuxième lampe");
     }
 
     @Test
     public void testActiverLampe0() {
         Telecommande t = new Telecommande();
         Lampe l = new Lampe("Salon");
-
         t.ajouterLampe(l);
         t.activerLampe(0);
-
-        assertTrue(l.toString().contains("true"));
+        assertTrue(l.isAllume(), "La lampe d'indice 0 devrait être allumé");
     }
 
     @Test
     public void testActiverLampe1() {
         Telecommande t = new Telecommande();
         Lampe l1 = new Lampe("Salon");
-        Lampe l2 = new Lampe("Chambre");
-
+        Lampe l2 = new Lampe("Salon");
         t.ajouterLampe(l1);
         t.ajouterLampe(l2);
-
         t.activerLampe(1);
-
-        assertTrue(l2.toString().contains("true"));
+        assertTrue(l2.isAllume(), "La lampe d'indice 1 devrait être allumé");
     }
 
-    @Test(expected = Error.class)
+    @Test
     public void testLampeInexistante() {
         Telecommande t = new Telecommande();
-        t.activerLampe(0);
+        boolean erreur = false;
+        try {
+            t.activerLampe(0);
+        } catch (Error e) {
+            erreur = true;
+        }
+        assertTrue(erreur, "La télécommande devrait être innexistante");
     }
+
+
 }
