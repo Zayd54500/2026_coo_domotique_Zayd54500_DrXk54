@@ -3,7 +3,6 @@ import java.util.Scanner;
 /**
  * classe qui cree des lampes et une telecommande associee.
  */
-
 public class Main {
 
     public static void main(String args[]) {
@@ -16,12 +15,15 @@ public class Main {
         // ajoute des chaines Hifi
         ajouter2Hifi(t);
 
+        // ajoute une cheminee
+        ajouter1Cheminee(t);
+
         // test d'activation lampes
-        t.activerAppareil(1);
-        t.activerAppareil(3);
+        t.allumer(1);
+        t.allumer(3);
 
         // test d'activation Hifi
-        t.activerTout(); // toutes les lampes et hifi activées
+        t.allumerTout(); // tous les appareils actives
         System.out.println(t);
 
         // gestion du menu
@@ -30,7 +32,7 @@ public class Main {
 
     /**
      * menu qui permet de manipuler une telecommande
-     * 
+     *
      * @param t telecommande a manipuler
      */
     private static void lancerMenu(Telecommande t) {
@@ -40,25 +42,23 @@ public class Main {
         boolean fini = false;
 
         while (!fini) {
-            System.out.println("Entrer le type d'appareil (lampe/hifi/exit) : ");
+            System.out.println("Entrer le type d'appareil (lampe/hifi/cheminee/exit) : ");
             String type = sc.nextLine();
 
             if (type.equals("exit")) {
                 System.out.println("== Fin du programme == ");
-                break;
-            }
-
-            if (type.equals("lampe")) {
+                fini = true;
+            } else if (type.equals("lampe")) {
                 System.out.println("Entrer le numero de la lampe : ");
                 int choix = sc.nextInt();
-                sc.nextLine(); // consommer le retour chariot
+                sc.nextLine();
                 System.out.println("Entrer commande (+/-) : ");
                 String com = sc.nextLine();
 
                 if (com.equals("+")) {
-                    t.activerAppareil(choix);
+                    t.allumer(choix);
                 } else if (com.equals("-")) {
-                    t.desactiverAppareil(choix);
+                    t.eteindre(choix);
                 } else {
                     System.out.println("Commande inconnue");
                 }
@@ -66,14 +66,29 @@ public class Main {
             } else if (type.equals("hifi")) {
                 System.out.println("Entrer le numero de la Hifi : ");
                 int choix = sc.nextInt();
-                sc.nextLine(); // consommer le retour chariot
+                sc.nextLine();
                 System.out.println("Entrer commande (+/-) : ");
                 String com = sc.nextLine();
 
                 if (com.equals("+")) {
-                    t.activerAppareil(choix);
+                    t.allumer(choix);
                 } else if (com.equals("-")) {
-                    t.desactiverAppareil(choix);
+                    t.eteindre(choix);
+                } else {
+                    System.out.println("Commande inconnue");
+                }
+
+            } else if (type.equals("cheminee")) {
+                System.out.println("Entrer le numero de la cheminee : ");
+                int choix = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Entrer commande (+/-) : ");
+                String com = sc.nextLine();
+
+                if (com.equals("+")) {
+                    t.allumer(choix);
+                } else if (com.equals("-")) {
+                    t.eteindre(choix);
                 } else {
                     System.out.println("Commande inconnue");
                 }
@@ -114,5 +129,14 @@ public class Main {
 
         Hifi h2 = new Hifi();
         t.ajouterAppareil(h2);
+    }
+
+    /**
+     * creation d'une cheminee et ajout dans la telecommande
+     */
+    private static void ajouter1Cheminee(Telecommande t) {
+        Cheminee c1 = new Cheminee();
+        AdaptateurCheminee ac1 = new AdaptateurCheminee(c1);
+        t.ajouterAppareil(ac1);
     }
 }

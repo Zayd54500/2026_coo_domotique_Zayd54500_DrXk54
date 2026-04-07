@@ -5,38 +5,39 @@ public class Telecommande {
     private ArrayList<Appareil> appareils;
 
     public Telecommande() {
-        appareils = new ArrayList<>();
+        appareils = new ArrayList<Appareil>();
     }
 
     public void ajouterAppareil(Appareil a) {
         appareils.add(a);
     }
 
-    public void activerAppareil(int indiceAppareil) {
-        if (indiceAppareil < 0 || indiceAppareil >= appareils.size()) {
-            throw new Error("lampe innexistante");
+    public void allumer(int i) {
+        if (i < 0 || i >= appareils.size()) {
+            throw new Error("Appareil inexistant");
         }
-        appareils.get(indiceAppareil).allumer();
+        appareils.get(i).allumer();
     }
 
-    public void desactiverAppareil(int indiceAppareil) {
-        if (indiceAppareil < 0 || indiceAppareil >= appareils.size()) {
-            throw new Error("lampe innexistante");
+    public void eteindre(int i) {
+        if (i < 0 || i >= appareils.size()) {
+            throw new Error("Appareil inexistant");
         }
-        appareils.get(indiceAppareil).eteindre();
+        appareils.get(i).eteindre();
     }
 
-    public void activerTout() {
+    public void allumerTout() {
         for (Appareil a : appareils) {
             a.allumer();
         }
     }
 
+    public int getNombre() {
+        return appareils.size();
+    }
+
+    @Override
     public String toString() {
-        String resultat = "";
-        for (int i = 0; i < appareils.size(); i++) {
-            resultat += i + " - " + appareils.get(i).toString() + "\n";
-        }
-        return resultat;
+        return appareils.toString();
     }
 }
