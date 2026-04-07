@@ -17,8 +17,8 @@ public class Main {
         ajouter2Hifi(t);
 
         // test d'activation lampes
-        t.activerLampe(1);
-        t.activerLampe(3);
+        t.activerAppareil(1);
+        t.activerAppareil(3);
 
         // test d'activation Hifi
         t.activerTout(); // toutes les lampes et hifi activées
@@ -56,9 +56,9 @@ public class Main {
                 String com = sc.nextLine();
 
                 if (com.equals("+")) {
-                    t.activerLampe(choix);
+                    t.activerAppareil(choix);
                 } else if (com.equals("-")) {
-                    t.desactiverLampe(choix);
+                    t.desactiverAppareil(choix);
                 } else {
                     System.out.println("Commande inconnue");
                 }
@@ -71,9 +71,9 @@ public class Main {
                 String com = sc.nextLine();
 
                 if (com.equals("+")) {
-                    t.activerHifi(choix);
+                    t.activerAppareil(choix);
                 } else if (com.equals("-")) {
-                    t.desactiverHifi(choix);
+                    t.desactiverAppareil(choix);
                 } else {
                     System.out.println("Commande inconnue");
                 }
@@ -93,16 +93,16 @@ public class Main {
      */
     private static void ajouter4Lampes(Telecommande t) {
         Lampe l1 = new Lampe("Lampe1");
-        t.ajouterLampe(l1);
+        t.ajouterAppareil(l1);
 
         Lampe l2 = new Lampe("Lampe2");
-        t.ajouterLampe(l2);
+        t.ajouterAppareil(l2);
 
         Lampe l3 = new Lampe("Lampe3");
-        t.ajouterLampe(l3);
+        t.ajouterAppareil(l3);
 
         Lampe l4 = new Lampe("Lampe4");
-        t.ajouterLampe(l4);
+        t.ajouterAppareil(l4);
     }
 
     /**
@@ -110,9 +110,9 @@ public class Main {
      */
     private static void ajouter2Hifi(Telecommande t) {
         Hifi h1 = new Hifi();
-        t.ajouterHifi(h1);
+        t.ajouterAppareil(h1);
 
         Hifi h2 = new Hifi();
-        t.ajouterHifi(h2);
+        t.ajouterAppareil(h2);
     }
 }

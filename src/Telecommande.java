@@ -2,74 +2,41 @@ import java.util.ArrayList;
 
 public class Telecommande {
 
-    private ArrayList<Lampe> lampes;
-
-    private ArrayList<Hifi> hifis;
+    private ArrayList<Appareil> appareils;
 
     public Telecommande() {
-        lampes = new ArrayList<>();
-        hifis = new ArrayList<>();
+        appareils = new ArrayList<>();
     }
 
-    public void ajouterLampe(Lampe l) {
-        lampes.add(l);
+    public void ajouterAppareil(Appareil a) {
+        appareils.add(a);
     }
 
-    public void ajouterHifi(Hifi h) {
-        hifis.add(h);
-    }
-
-
-
-    public void activerLampe(int indiceLampe) {
-        if (indiceLampe < 0 || indiceLampe >= lampes.size()) {
+    public void activerAppareil(int indiceAppareil) {
+        if (indiceAppareil < 0 || indiceAppareil >= appareils.size()) {
             throw new Error("lampe innexistante");
         }
-        lampes.get(indiceLampe).allumer();
+        appareils.get(indiceAppareil).allumer();
     }
 
-    public void activerHifi(int indiceHifi) {
-        if (indiceHifi < 0 || indiceHifi >= hifis.size()) {
-            throw new Error("hifi innexistante");
-        }
-        hifis.get(indiceHifi).allumer();
-    }
-
-    public void desactiverLampe(int indiceLampe) {
-        if (indiceLampe < 0 || indiceLampe >= lampes.size()) {
+    public void desactiverAppareil(int indiceAppareil) {
+        if (indiceAppareil < 0 || indiceAppareil >= appareils.size()) {
             throw new Error("lampe innexistante");
         }
-        lampes.get(indiceLampe).eteindre();
-    }
-
-    public void desactiverHifi(int indiceHifi) {
-        if (indiceHifi < 0 || indiceHifi >= hifis.size()) {
-            throw new Error("hifi innexistante");
-        }
-        hifis.get(indiceHifi).eteindre();
+        appareils.get(indiceAppareil).eteindre();
     }
 
     public void activerTout() {
-        for (Lampe l : lampes) {
-            l.allumer();
-        }
-        for (Hifi h : hifis) {
-            h.allumer();
+        for (Appareil a : appareils) {
+            a.allumer();
         }
     }
 
     public String toString() {
-        String resultat = "Lampes :\n";
-        for (int i = 0; i < lampes.size(); i++) {
-            resultat += i + " - " + lampes.get(i).toString() + "\n";
+        String resultat = "";
+        for (int i = 0; i < appareils.size(); i++) {
+            resultat += i + " - " + appareils.get(i).toString() + "\n";
         }
-        resultat += "Hifis :\n";
-
-        for (int i = 0; i < hifis.size(); i++) {
-            resultat += i + " - " + hifis.get(i).toString() + "\n";
-        }
-
         return resultat;
-
     }
 }
