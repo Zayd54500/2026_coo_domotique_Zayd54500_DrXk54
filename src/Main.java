@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import thermos.Thermostat;
 
 /**
  * classe qui cree des lampes et une telecommande associee.
@@ -9,6 +10,15 @@ public class Main {
         // la telecommande vide
         Telecommande t = new Telecommande();
 
+        // Création d'un thermostat
+        Thermostat thermostat = new Thermostat();
+
+        // Création d'un adaptateur de thermostat
+        AdaptateurThermostat adaptateurThermostat = new AdaptateurThermostat(thermostat);
+
+        // Ajout d'un adaptateur thermostat dans les appareils
+        t.ajouterAppareil(adaptateurThermostat);
+
         // ajoute des lampes
         ajouter4Lampes(t);
 
@@ -17,6 +27,13 @@ public class Main {
 
         // ajoute une cheminee
         ajouter1Cheminee(t);
+
+
+        // Allumage du thermostat
+        t.allumer(t.getNombre() - 1);
+
+        // Eteignage du thermostat
+        t.eteindre(t.getNombre() - 1);
 
         // test d'activation lampes
         t.allumer(1);
@@ -119,7 +136,6 @@ public class Main {
         Lampe l4 = new Lampe("Lampe4");
         t.ajouterAppareil(l4);
     }
-
     /**
      * creation de chaines Hifi et ajout dans la telecommande
      */
